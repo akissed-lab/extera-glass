@@ -6,40 +6,50 @@
 	objectVersion = 56;
 	objects = {
 /* Begin PBXBuildFile section */
-		52633A09BB2D6EE9CEC50716 /* ExteraGlassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275F1E2A332F5EAC05C9364 /* ExteraGlassApp.swift */; };
-		93A744422234CBF560E32FA0 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B8C4127FF15318A0B3E954 /* RootView.swift */; };
+		E4D7D830121B5E5BB8735B41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0498F7CB6F4B34FEC80EAB0D /* AppDelegate.swift */; };
+		0C80EBDE5590FA037EA094A6 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805ABBF0BF46827D0D47694C /* RootViewController.swift */; };
 		E58D1281A204B4DA721E5950 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F539F3726E414F1DDDCDFB /* Config.swift */; };
 		7D63120FA0A73D3B05787E58 /* TDLibService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE36A934876AA15D318ED9E0 /* TDLibService.swift */; };
 		F1EE9FC73F99B7333490C760 /* TelegramModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4723334B7A7303145D36D20C /* TelegramModels.swift */; };
-		C721AC46D74E4DF6D4D054F7 /* LiquidGlass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66107631E7D0411D38157DD /* LiquidGlass.swift */; };
-		184129B36C6AB2BE5B159F87 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF93364E4F817EC513007316 /* Theme.swift */; };
+		B3988A73BA19894E04626EC9 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B13C24E4B7332FDF3AC811 /* AppTheme.swift */; };
 		7213F372FFFBA7378C3225CF /* ThemeTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88750FD81CA4E73415049BDA /* ThemeTokens.swift */; };
-		5141946930F031C6D03E2DC0 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62954033ED68043AA1B7E8 /* AuthView.swift */; };
-		B593DAF41812B52DD02C8FD7 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E782906DC745BFC2CFB09183 /* AvatarView.swift */; };
-		377AC163306A6EAD21EDA0FD /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4246E44A213949B5E533EA84 /* ChatListView.swift */; };
-		B0CC8C942E50F451BC92AD53 /* ChatRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8203A5076F00A8B774BA96DE /* ChatRowView.swift */; };
-		ABEC6370CA37D8C3907EC940 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4DEA6779A719424E4F03F /* ChatView.swift */; };
-		69EAC6BBE6BF4A0115E897EE /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A28C522630E3A722C5886 /* MessageBubbleView.swift */; };
-		17B3FC97F633F40C69104ED0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF834C0D3D59B970F1599A1C /* SettingsView.swift */; };
+		FD435BD8AD6BF607205F0AED /* Tweaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E262BCFC1B0627BABE94EC /* Tweaks.swift */; };
+		3789C9ACD5928EAC3E8FA4C9 /* Wallpaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45C85F69C97D4A1D7E721B3 /* Wallpaper.swift */; };
+		017BD527A002E1724AA1134F /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37675C4E3E2C46F4CFB39DC5 /* AuthViewController.swift */; };
+		78D4E221B352187F8BC8FD42 /* AvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C794BFFB35184690D727E0A /* AvatarImageView.swift */; };
+		53C8BC1FC323744730D97552 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5BBD826348AF436CA6B6EE /* ChatListCell.swift */; };
+		4A28974B8954314D6093B9EA /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749B32D51F9BCAFE900A91E8 /* ChatListViewController.swift */; };
+		F0186CA426A97CF51A335F44 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3796FA3D238D88A25BE9AD /* ChatViewController.swift */; };
+		70CD16FA617574637DE34635 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F9B7F355D6BB3B508FFB15 /* ComposeViewController.swift */; };
+		93C512A4D26F316AB4FCD5A2 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE8AFD6B64C5E43A6F9F375 /* MainTabBarController.swift */; };
+		DFBB81733F99CF0209D3E8F9 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91645082E55981954D2D0D /* MessageCell.swift */; };
+		C2194DBF12C3840EC8B44E87 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5A9845A0863C6E8B2B17A /* SettingsViewController.swift */; };
+		5CD6536A50036CC27CB11F93 /* ThemeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369EDF5026EFF97068BA6163 /* ThemeSelectionViewController.swift */; };
+		64C7910AFE3E6C83B1E4B361 /* UIKitSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AF801D227F73AFC2FD14F9 /* UIKitSupport.swift */; };
 		8C1C51E0B6F2E1C346DC603A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 225749469C153CF9A6C720E9 /* Assets.xcassets */; };
 		6CD5F0EC02E1380F8338031B /* TDLibKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0DB52B23D9F61E34360BD5A5 /* TDLibKit */; };
 /* End PBXBuildFile section */
 /* Begin PBXFileReference section */
-		2275F1E2A332F5EAC05C9364 /* ExteraGlassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExteraGlassApp.swift"; sourceTree = "<group>"; };
-		E3B8C4127FF15318A0B3E954 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootView.swift"; sourceTree = "<group>"; };
+		0498F7CB6F4B34FEC80EAB0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate.swift"; sourceTree = "<group>"; };
+		805ABBF0BF46827D0D47694C /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootViewController.swift"; sourceTree = "<group>"; };
 		62F539F3726E414F1DDDCDFB /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config.swift"; sourceTree = "<group>"; };
 		DE36A934876AA15D318ED9E0 /* TDLibService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TDLibService.swift"; sourceTree = "<group>"; };
 		4723334B7A7303145D36D20C /* TelegramModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TelegramModels.swift"; sourceTree = "<group>"; };
-		B66107631E7D0411D38157DD /* LiquidGlass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LiquidGlass.swift"; sourceTree = "<group>"; };
-		BF93364E4F817EC513007316 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme.swift"; sourceTree = "<group>"; };
+		84B13C24E4B7332FDF3AC811 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppTheme.swift"; sourceTree = "<group>"; };
 		88750FD81CA4E73415049BDA /* ThemeTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeTokens.swift"; sourceTree = "<group>"; };
-		EC62954033ED68043AA1B7E8 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthView.swift"; sourceTree = "<group>"; };
-		E782906DC745BFC2CFB09183 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvatarView.swift"; sourceTree = "<group>"; };
-		4246E44A213949B5E533EA84 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListView.swift"; sourceTree = "<group>"; };
-		8203A5076F00A8B774BA96DE /* ChatRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatRowView.swift"; sourceTree = "<group>"; };
-		5ED4DEA6779A719424E4F03F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatView.swift"; sourceTree = "<group>"; };
-		791A28C522630E3A722C5886 /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageBubbleView.swift"; sourceTree = "<group>"; };
-		FF834C0D3D59B970F1599A1C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView.swift"; sourceTree = "<group>"; };
+		16E262BCFC1B0627BABE94EC /* Tweaks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tweaks.swift"; sourceTree = "<group>"; };
+		A45C85F69C97D4A1D7E721B3 /* Wallpaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Wallpaper.swift"; sourceTree = "<group>"; };
+		37675C4E3E2C46F4CFB39DC5 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController.swift"; sourceTree = "<group>"; };
+		3C794BFFB35184690D727E0A /* AvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvatarImageView.swift"; sourceTree = "<group>"; };
+		6D5BBD826348AF436CA6B6EE /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListCell.swift"; sourceTree = "<group>"; };
+		749B32D51F9BCAFE900A91E8 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListViewController.swift"; sourceTree = "<group>"; };
+		8E3796FA3D238D88A25BE9AD /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController.swift"; sourceTree = "<group>"; };
+		32F9B7F355D6BB3B508FFB15 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComposeViewController.swift"; sourceTree = "<group>"; };
+		4BE8AFD6B64C5E43A6F9F375 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainTabBarController.swift"; sourceTree = "<group>"; };
+		0A91645082E55981954D2D0D /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageCell.swift"; sourceTree = "<group>"; };
+		57E5A9845A0863C6E8B2B17A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsViewController.swift"; sourceTree = "<group>"; };
+		369EDF5026EFF97068BA6163 /* ThemeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeSelectionViewController.swift"; sourceTree = "<group>"; };
+		A1AF801D227F73AFC2FD14F9 /* UIKitSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKitSupport.swift"; sourceTree = "<group>"; };
 		225749469C153CF9A6C720E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		629E82BC595D81DE9A634DDA /* ExteraGlass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExteraGlass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68E77A9D7BC78A97D4F4E27B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,7 +88,7 @@
 				704FD793F5FDAEE938BD8990 /* App */,
 				E3B35961988160CED723FBBE /* Core */,
 				D2A4426843C9E1CFB253ABC2 /* Theme */,
-				5341484856938A00BA37D121 /* Views */,
+				4E6C1A906B60F283993B484B /* UI */,
 				225749469C153CF9A6C720E9 /* Assets.xcassets */,
 				68E77A9D7BC78A97D4F4E27B /* Info.plist */,
 			);
@@ -88,8 +98,8 @@
 		704FD793F5FDAEE938BD8990 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				2275F1E2A332F5EAC05C9364 /* ExteraGlassApp.swift */,
-				E3B8C4127FF15318A0B3E954 /* RootView.swift */,
+				0498F7CB6F4B34FEC80EAB0D /* AppDelegate.swift */,
+				805ABBF0BF46827D0D47694C /* RootViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -106,25 +116,30 @@
 		D2A4426843C9E1CFB253ABC2 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				B66107631E7D0411D38157DD /* LiquidGlass.swift */,
-				BF93364E4F817EC513007316 /* Theme.swift */,
+				84B13C24E4B7332FDF3AC811 /* AppTheme.swift */,
 				88750FD81CA4E73415049BDA /* ThemeTokens.swift */,
+				16E262BCFC1B0627BABE94EC /* Tweaks.swift */,
+				A45C85F69C97D4A1D7E721B3 /* Wallpaper.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
 		};
-		5341484856938A00BA37D121 /* Views */ = {
+		4E6C1A906B60F283993B484B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				EC62954033ED68043AA1B7E8 /* AuthView.swift */,
-				E782906DC745BFC2CFB09183 /* AvatarView.swift */,
-				4246E44A213949B5E533EA84 /* ChatListView.swift */,
-				8203A5076F00A8B774BA96DE /* ChatRowView.swift */,
-				5ED4DEA6779A719424E4F03F /* ChatView.swift */,
-				791A28C522630E3A722C5886 /* MessageBubbleView.swift */,
-				FF834C0D3D59B970F1599A1C /* SettingsView.swift */,
+				37675C4E3E2C46F4CFB39DC5 /* AuthViewController.swift */,
+				3C794BFFB35184690D727E0A /* AvatarImageView.swift */,
+				6D5BBD826348AF436CA6B6EE /* ChatListCell.swift */,
+				749B32D51F9BCAFE900A91E8 /* ChatListViewController.swift */,
+				8E3796FA3D238D88A25BE9AD /* ChatViewController.swift */,
+				32F9B7F355D6BB3B508FFB15 /* ComposeViewController.swift */,
+				4BE8AFD6B64C5E43A6F9F375 /* MainTabBarController.swift */,
+				0A91645082E55981954D2D0D /* MessageCell.swift */,
+				57E5A9845A0863C6E8B2B17A /* SettingsViewController.swift */,
+				369EDF5026EFF97068BA6163 /* ThemeSelectionViewController.swift */,
+				A1AF801D227F73AFC2FD14F9 /* UIKitSupport.swift */,
 			);
-			path = Views;
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,21 +212,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52633A09BB2D6EE9CEC50716 /* ExteraGlassApp.swift in Sources */,
-				93A744422234CBF560E32FA0 /* RootView.swift in Sources */,
+				E4D7D830121B5E5BB8735B41 /* AppDelegate.swift in Sources */,
+				0C80EBDE5590FA037EA094A6 /* RootViewController.swift in Sources */,
 				E58D1281A204B4DA721E5950 /* Config.swift in Sources */,
 				7D63120FA0A73D3B05787E58 /* TDLibService.swift in Sources */,
 				F1EE9FC73F99B7333490C760 /* TelegramModels.swift in Sources */,
-				C721AC46D74E4DF6D4D054F7 /* LiquidGlass.swift in Sources */,
-				184129B36C6AB2BE5B159F87 /* Theme.swift in Sources */,
+				B3988A73BA19894E04626EC9 /* AppTheme.swift in Sources */,
 				7213F372FFFBA7378C3225CF /* ThemeTokens.swift in Sources */,
-				5141946930F031C6D03E2DC0 /* AuthView.swift in Sources */,
-				B593DAF41812B52DD02C8FD7 /* AvatarView.swift in Sources */,
-				377AC163306A6EAD21EDA0FD /* ChatListView.swift in Sources */,
-				B0CC8C942E50F451BC92AD53 /* ChatRowView.swift in Sources */,
-				ABEC6370CA37D8C3907EC940 /* ChatView.swift in Sources */,
-				69EAC6BBE6BF4A0115E897EE /* MessageBubbleView.swift in Sources */,
-				17B3FC97F633F40C69104ED0 /* SettingsView.swift in Sources */,
+				FD435BD8AD6BF607205F0AED /* Tweaks.swift in Sources */,
+				3789C9ACD5928EAC3E8FA4C9 /* Wallpaper.swift in Sources */,
+				017BD527A002E1724AA1134F /* AuthViewController.swift in Sources */,
+				78D4E221B352187F8BC8FD42 /* AvatarImageView.swift in Sources */,
+				53C8BC1FC323744730D97552 /* ChatListCell.swift in Sources */,
+				4A28974B8954314D6093B9EA /* ChatListViewController.swift in Sources */,
+				F0186CA426A97CF51A335F44 /* ChatViewController.swift in Sources */,
+				70CD16FA617574637DE34635 /* ComposeViewController.swift in Sources */,
+				93C512A4D26F316AB4FCD5A2 /* MainTabBarController.swift in Sources */,
+				DFBB81733F99CF0209D3E8F9 /* MessageCell.swift in Sources */,
+				C2194DBF12C3840EC8B44E87 /* SettingsViewController.swift in Sources */,
+				5CD6536A50036CC27CB11F93 /* ThemeSelectionViewController.swift in Sources */,
+				64C7910AFE3E6C83B1E4B361 /* UIKitSupport.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
