@@ -255,7 +255,7 @@ def main() -> None:
         add(f'\t\t\t\tMARKETING_VERSION = 1.0.0;')
         add(f'\t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = app.exteraglass.client;')
         add(f'\t\t\t\tPRODUCT_NAME = "$(TARGET_NAME)";')
-        add('\t\t\t\tSUPPORTED_PLATFORMS = iphoneos iphonesimulator;')
+        add('\t\t\t\tSUPPORTED_PLATFORMS = "iphoneos iphonesimulator";')
         add('\t\t\t\tSWIFT_EMIT_LOC_STRINGS = YES;')
         add('\t\t\t\tTARGETED_DEVICE_FAMILY = "1,2";')
         add('\t\t\t\tGENERATE_INFOPLIST_FILE = NO;')
