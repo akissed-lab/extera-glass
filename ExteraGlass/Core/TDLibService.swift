@@ -197,6 +197,7 @@ final class TDLibService: ObservableObject {
             guard let self else { return }
             do {
                 try Task.checkCancellation()
+                let systemVersion = await MainActor.run { UIDevice.current.systemVersion }
                 _ = try await self.client.setTdlibParameters(
                     apiHash: Config.apiHash,
                     apiId: Config.apiID,
@@ -206,7 +207,7 @@ final class TDLibService: ObservableObject {
                     deviceModel: Config.deviceModel,
                     filesDirectory: self.tdlibFilesDirectory,
                     systemLanguageCode: Config.languageCode,
-                    systemVersion: UIDevice.current.systemVersion,
+                    systemVersion: systemVersion,
                     useChatInfoDatabase: true,
                     useFileDatabase: true,
                     useMessageDatabase: true,
