@@ -1,0 +1,14 @@
+import Foundation
+
+/// Шаблон. Скопируйте в Config.swift и замените значения своими ключами
+/// с https://my.telegram.org/apps (API development tools).
+///
+/// Файл Config.swift НЕ коммитится в git — там лежат реальные секреты.
+enum Config {
+    static let apiID: Int = 0
+    static let apiHash: String = "YOUR_API_HASH"
+
+    static let appVersion = "1.0.0"
+    static let deviceModel = "ExteraGlass iOS"
+    static let languageCode = Locale.current.language.languageCode?.identifier ?? "en"
+}

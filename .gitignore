@@ -1,0 +1,14 @@
+# Секреты — никогда не коммитить
+ExteraGlass/Config.swift
+
+# Сборка
+build/
+export/
+DerivedData/
+*.xcarchive
+*.ipa
+*.xcuserdatad/
+xcuserdata/
+
+# System
+.DS_Store

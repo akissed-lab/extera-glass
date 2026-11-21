@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+/* Begin PBXBuildFile section */
+		52633A09BB2D6EE9CEC50716 /* ExteraGlassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275F1E2A332F5EAC05C9364 /* ExteraGlassApp.swift */; };
+		93A744422234CBF560E32FA0 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B8C4127FF15318A0B3E954 /* RootView.swift */; };
+		E58D1281A204B4DA721E5950 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62F539F3726E414F1DDDCDFB /* Config.swift */; };
+		7D63120FA0A73D3B05787E58 /* TDLibService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE36A934876AA15D318ED9E0 /* TDLibService.swift */; };
+		F1EE9FC73F99B7333490C760 /* TelegramModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4723334B7A7303145D36D20C /* TelegramModels.swift */; };
+		C721AC46D74E4DF6D4D054F7 /* LiquidGlass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66107631E7D0411D38157DD /* LiquidGlass.swift */; };
+		184129B36C6AB2BE5B159F87 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF93364E4F817EC513007316 /* Theme.swift */; };
+		7213F372FFFBA7378C3225CF /* ThemeTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88750FD81CA4E73415049BDA /* ThemeTokens.swift */; };
+		5141946930F031C6D03E2DC0 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC62954033ED68043AA1B7E8 /* AuthView.swift */; };
+		B593DAF41812B52DD02C8FD7 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E782906DC745BFC2CFB09183 /* AvatarView.swift */; };
+		377AC163306A6EAD21EDA0FD /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4246E44A213949B5E533EA84 /* ChatListView.swift */; };
+		B0CC8C942E50F451BC92AD53 /* ChatRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8203A5076F00A8B774BA96DE /* ChatRowView.swift */; };
+		ABEC6370CA37D8C3907EC940 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4DEA6779A719424E4F03F /* ChatView.swift */; };
+		69EAC6BBE6BF4A0115E897EE /* MessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791A28C522630E3A722C5886 /* MessageBubbleView.swift */; };
+		17B3FC97F633F40C69104ED0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF834C0D3D59B970F1599A1C /* SettingsView.swift */; };
+		8C1C51E0B6F2E1C346DC603A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 225749469C153CF9A6C720E9 /* Assets.xcassets */; };
+		6CD5F0EC02E1380F8338031B /* TDLibKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0DB52B23D9F61E34360BD5A5 /* TDLibKit */; };
+/* End PBXBuildFile section */
+/* Begin PBXFileReference section */
+		2275F1E2A332F5EAC05C9364 /* ExteraGlassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExteraGlassApp.swift"; sourceTree = "<group>"; };
+		E3B8C4127FF15318A0B3E954 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootView.swift"; sourceTree = "<group>"; };
+		62F539F3726E414F1DDDCDFB /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config.swift"; sourceTree = "<group>"; };
+		DE36A934876AA15D318ED9E0 /* TDLibService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TDLibService.swift"; sourceTree = "<group>"; };
+		4723334B7A7303145D36D20C /* TelegramModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TelegramModels.swift"; sourceTree = "<group>"; };
+		B66107631E7D0411D38157DD /* LiquidGlass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LiquidGlass.swift"; sourceTree = "<group>"; };
+		BF93364E4F817EC513007316 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme.swift"; sourceTree = "<group>"; };
+		88750FD81CA4E73415049BDA /* ThemeTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeTokens.swift"; sourceTree = "<group>"; };
+		EC62954033ED68043AA1B7E8 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthView.swift"; sourceTree = "<group>"; };
+		E782906DC745BFC2CFB09183 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvatarView.swift"; sourceTree = "<group>"; };
+		4246E44A213949B5E533EA84 /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatListView.swift"; sourceTree = "<group>"; };
+		8203A5076F00A8B774BA96DE /* ChatRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatRowView.swift"; sourceTree = "<group>"; };
+		5ED4DEA6779A719424E4F03F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatView.swift"; sourceTree = "<group>"; };
+		791A28C522630E3A722C5886 /* MessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageBubbleView.swift"; sourceTree = "<group>"; };
+		FF834C0D3D59B970F1599A1C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView.swift"; sourceTree = "<group>"; };
+		225749469C153CF9A6C720E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		629E82BC595D81DE9A634DDA /* ExteraGlass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExteraGlass.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		68E77A9D7BC78A97D4F4E27B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+/* Begin PBXFrameworksBuildPhase section */
+		CF5BDB0BEAFE176F9629192A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CD5F0EC02E1380F8338031B /* TDLibKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+/* Begin PBXGroup section */
+		DF891E785808226D241F246E = {
+			isa = PBXGroup;
+			children = (
+				CF8D0BD4B75E8C2C174692A5 /* ExteraGlass */,
+				00C45FD35CB0F9C5F764F070 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		00C45FD35CB0F9C5F764F070 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				629E82BC595D81DE9A634DDA /* ExteraGlass.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF8D0BD4B75E8C2C174692A5 /* ExteraGlass */ = {
+			isa = PBXGroup;
+			children = (
+				62F539F3726E414F1DDDCDFB /* Config.swift */,
+				704FD793F5FDAEE938BD8990 /* App */,
+				E3B35961988160CED723FBBE /* Core */,
+				D2A4426843C9E1CFB253ABC2 /* Theme */,
+				5341484856938A00BA37D121 /* Views */,
+				225749469C153CF9A6C720E9 /* Assets.xcassets */,
+				68E77A9D7BC78A97D4F4E27B /* Info.plist */,
+			);
+			path = ExteraGlass;
+			sourceTree = "<group>";
+		};
+		704FD793F5FDAEE938BD8990 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2275F1E2A332F5EAC05C9364 /* ExteraGlassApp.swift */,
+				E3B8C4127FF15318A0B3E954 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E3B35961988160CED723FBBE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DE36A934876AA15D318ED9E0 /* TDLibService.swift */,
+				4723334B7A7303145D36D20C /* TelegramModels.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		D2A4426843C9E1CFB253ABC2 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				B66107631E7D0411D38157DD /* LiquidGlass.swift */,
+				BF93364E4F817EC513007316 /* Theme.swift */,
+				88750FD81CA4E73415049BDA /* ThemeTokens.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		5341484856938A00BA37D121 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC62954033ED68043AA1B7E8 /* AuthView.swift */,
+				E782906DC745BFC2CFB09183 /* AvatarView.swift */,
+				4246E44A213949B5E533EA84 /* ChatListView.swift */,
+				8203A5076F00A8B774BA96DE /* ChatRowView.swift */,
+				5ED4DEA6779A719424E4F03F /* ChatView.swift */,
+				791A28C522630E3A722C5886 /* MessageBubbleView.swift */,
+				FF834C0D3D59B970F1599A1C /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+/* Begin PBXNativeTarget section */
+		29C7B681C8D62CBAC94D51C0 /* ExteraGlass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED59008E052259AC151C5C09 /* Build configuration list for PBXNativeTarget "ExteraGlass" */;
+			buildPhases = (
+				1CDF2F71A52B082132B04DFF /* Sources */,
+				CF5BDB0BEAFE176F9629192A /* Frameworks */,
+				C02F1309AF4906C92F1EAD44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExteraGlass;
+			packageProductDependencies = (
+				0DB52B23D9F61E34360BD5A5 /* TDLibKit */,
+			);
+			productName = ExteraGlass;
+			productReference = 629E82BC595D81DE9A634DDA /* ExteraGlass.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+/* Begin PBXProject section */
+		98F54143AB4E86B28C3AFEE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					29C7B681C8D62CBAC94D51C0 = {
+						CreatedOnToolsVersion = "16.0";
+					};
+				};
+			};
+			buildConfigurationList = 7198B1A165AEE41CD0DEE38D /* Build configuration list for PBXProject "ExteraGlass" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DF891E785808226D241F246E;
+			packageReferences = (
+				1C4F1B348ACD0450D5EA1DEA /* XCRemoteSwiftPackageReference "TDLibKit" */,
+			);
+			productRefGroup = 00C45FD35CB0F9C5F764F070 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				29C7B681C8D62CBAC94D51C0 /* ExteraGlass */,
+			);
+		};
+/* End PBXProject section */
+/* Begin PBXResourcesBuildPhase section */
+		C02F1309AF4906C92F1EAD44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C1C51E0B6F2E1C346DC603A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+/* Begin PBXSourcesBuildPhase section */
+		1CDF2F71A52B082132B04DFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52633A09BB2D6EE9CEC50716 /* ExteraGlassApp.swift in Sources */,
+				93A744422234CBF560E32FA0 /* RootView.swift in Sources */,
+				E58D1281A204B4DA721E5950 /* Config.swift in Sources */,
+				7D63120FA0A73D3B05787E58 /* TDLibService.swift in Sources */,
+				F1EE9FC73F99B7333490C760 /* TelegramModels.swift in Sources */,
+				C721AC46D74E4DF6D4D054F7 /* LiquidGlass.swift in Sources */,
+				184129B36C6AB2BE5B159F87 /* Theme.swift in Sources */,
+				7213F372FFFBA7378C3225CF /* ThemeTokens.swift in Sources */,
+				5141946930F031C6D03E2DC0 /* AuthView.swift in Sources */,
+				B593DAF41812B52DD02C8FD7 /* AvatarView.swift in Sources */,
+				377AC163306A6EAD21EDA0FD /* ChatListView.swift in Sources */,
+				B0CC8C942E50F451BC92AD53 /* ChatRowView.swift in Sources */,
+				ABEC6370CA37D8C3907EC940 /* ChatView.swift in Sources */,
+				69EAC6BBE6BF4A0115E897EE /* MessageBubbleView.swift in Sources */,
+				17B3FC97F633F40C69104ED0 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+		877A6BA951A2EA0025A2ABE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		959134B361DD7E21ADEA3164 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1E0DDAF384B911BF23BC77ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = ExteraGlass/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.exteraglass.client;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = iphoneos iphonesimulator;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				GENERATE_INFOPLIST_FILE = NO;
+				ENABLE_PREVIEWS = YES;
+				CODE_SIGNING_ALLOWED = YES;
+			};
+			name = Debug;
+		};
+		A1EFC270D4D6011185E1BD4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = ExteraGlass/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.exteraglass.client;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = iphoneos iphonesimulator;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				GENERATE_INFOPLIST_FILE = NO;
+				ENABLE_PREVIEWS = YES;
+			};
+			name = Release;
+		};
+		7198B1A165AEE41CD0DEE38D /* Build configuration list for PBXProject */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				877A6BA951A2EA0025A2ABE8 /* Debug */,
+				959134B361DD7E21ADEA3164 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED59008E052259AC151C5C09 /* Build configuration list for PBXNativeTarget "ExteraGlass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E0DDAF384B911BF23BC77ED /* Debug */,
+				A1EFC270D4D6011185E1BD4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* Begin XCRemoteSwiftPackageReference section */
+		1C4F1B348ACD0450D5EA1DEA /* XCRemoteSwiftPackageReference "TDLibKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swiftgram/TDLibKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+/* Begin XCSwiftPackageProductDependency section */
+		0DB52B23D9F61E34360BD5A5 /* TDLibKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1C4F1B348ACD0450D5EA1DEA /* XCRemoteSwiftPackageReference "TDLibKit" */;
+			productName = TDLibKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+}
