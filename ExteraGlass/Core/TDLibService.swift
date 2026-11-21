@@ -22,18 +22,30 @@ final class TDLibService: ObservableObject {
     // MARK: - TDLib
 
     private let manager = TDLibClientManager()
-    private let client: TDLibClient
+    private var client: TDLibClient!
     private var didConfigure = false
     private var didLoadInitial = false
 
     init() {
-        // Замыкание не захватывает self: до конца инициализации client ещё не задан.
+        // Ставим shared ДО создания клиента: первое обновление TDLib может прийти
+        // мгновенно, и замыкание не должно его потерять.
+        TDLibService.shared = self
         client = manager.createClient { data, _ in
             guard let service = TDLibService.shared else { return }
             guard let update = try? JSONDecoder().decode(Update.self, from: data) else { return }
             DispatchQueue.main.async { service.handle(update) }
         }
-        TDLibService.shared = self
+
+        // Страховка на случай, если стартовое обновление всё же было пропущено.
+        Task { [weak self] in
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            await MainActor.run {
+                guard let self, !self.didConfigure else { return }
+                if case .authorizationStateWaitTdlibParameters = self.authorizationState {
+                    self.configureIfNeeded()
+                }
+            }
+        }
     }
 
     deinit {
