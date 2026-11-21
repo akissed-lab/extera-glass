@@ -27,10 +27,11 @@ final class TDLibService: ObservableObject {
     private var didLoadInitial = false
 
     init() {
-        client = manager.createClient { [weak self] data, _ in
-            guard let self = self else { return }
+        // Замыкание не захватывает self: до конца инициализации client ещё не задан.
+        client = manager.createClient { data, _ in
+            guard let service = TDLibService.shared else { return }
             guard let update = try? JSONDecoder().decode(Update.self, from: data) else { return }
-            DispatchQueue.main.async { self.handle(update) }
+            DispatchQueue.main.async { service.handle(update) }
         }
         TDLibService.shared = self
     }
