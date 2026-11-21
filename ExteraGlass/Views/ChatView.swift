@@ -1,4 +1,5 @@
 import SwiftUI
+import TDLibKit
 
 struct ChatView: View {
     @EnvironmentObject private var telegram: TDLibService

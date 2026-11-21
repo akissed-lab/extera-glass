@@ -61,7 +61,7 @@ struct AvatarView: View {
     }
 
     private var gradient: [Color] {
-        let hash = title.unicodeScalars.reduce(0) { Int($0.value) + $1.value }
+        let hash = title.unicodeScalars.reduce(0) { $0 + Int($1.value) }
         let palette: [[Color]] = [
             [.blue, .cyan], [.purple, .pink], [.orange, .red],
             [.green, .teal], [.indigo, .blue], [.brown, .orange],

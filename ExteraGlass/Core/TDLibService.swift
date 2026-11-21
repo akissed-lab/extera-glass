@@ -385,7 +385,7 @@ final class TDLibService: ObservableObject {
 
     // MARK: - Ошибки
 
-    private func report(_ error: Error) async {
+    private func report(_ error: any Error) async {
         let message = error.localizedDescription
         await MainActor.run { self.errorMessage = message }
     }
