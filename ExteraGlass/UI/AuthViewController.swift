@@ -10,6 +10,9 @@ final class AuthViewController: UIViewController {
     private var appearanceToken: AppearanceToken?
     private var busy = false
     private var action: (() -> Void)?
+    private var currentStatus = ""
+    private var currentConnectionError: String?
+    private var currentAuthError: String?
 
     private let scrollView = UIScrollView()
     private let stack = UIStackView()
@@ -17,6 +20,9 @@ final class AuthViewController: UIViewController {
     private let logoImage = UIImageView(image: UIImage(systemName: "paperplane.fill"))
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
+    private let statusLabel = UILabel()
+    private let errorLabel = UILabel()
+    private let retryButton = UIButton(type: .system)
 
     private let phoneField = UITextField()
     private let codeField = UITextField()
@@ -45,6 +51,30 @@ final class AuthViewController: UIViewController {
         telegram.$authorizationState
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in self?.render(state) }
+            .store(in: &cancellables)
+
+        telegram.$connectionStatus
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                self?.currentStatus = status
+                self?.updateDiagnostics()
+            }
+            .store(in: &cancellables)
+
+        telegram.$connectionError
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] message in
+                self?.currentConnectionError = message
+                self?.updateDiagnostics()
+            }
+            .store(in: &cancellables)
+
+        telegram.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] message in
+                self?.currentAuthError = message
+                self?.updateDiagnostics()
+            }
             .store(in: &cancellables)
     }
 
@@ -107,6 +137,19 @@ final class AuthViewController: UIViewController {
         subtitleLabel.numberOfLines = 0
         stack.addArrangedSubview(subtitleLabel)
 
+        statusLabel.font = .systemFont(ofSize: 12, weight: .regular)
+        statusLabel.textAlignment = .center
+        statusLabel.numberOfLines = 0
+        statusLabel.isHidden = true
+        stack.addArrangedSubview(statusLabel)
+
+        errorLabel.font = .systemFont(ofSize: 13, weight: .regular)
+        errorLabel.textColor = .systemRed
+        errorLabel.textAlignment = .center
+        errorLabel.numberOfLines = 0
+        errorLabel.isHidden = true
+        stack.addArrangedSubview(errorLabel)
+
         phoneField.placeholder = "Номер телефона"
         phoneField.keyboardType = .phonePad
         phoneField.textContentType = .telephoneNumber
@@ -144,6 +187,12 @@ final class AuthViewController: UIViewController {
         actionButton.addTarget(self, action: #selector(actionTapped), for: .touchUpInside)
         stack.addArrangedSubview(actionButton)
 
+        retryButton.setTitle("Повторить подключение", for: .normal)
+        retryButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        retryButton.addTarget(self, action: #selector(retryTapped), for: .touchUpInside)
+        retryButton.isHidden = true
+        stack.addArrangedSubview(retryButton)
+
         activity.hidesWhenStopped = true
         activity.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         stack.addArrangedSubview(activity)
@@ -157,8 +206,10 @@ final class AuthViewController: UIViewController {
         logoCircle.backgroundColor = theme.accent
         titleLabel.textColor = theme.primaryText
         subtitleLabel.textColor = theme.secondaryText
+        statusLabel.textColor = theme.secondaryText
         hintLabel.textColor = theme.secondaryText
         linkLabel.textColor = theme.accent
+        retryButton.setTitleColor(theme.accent, for: .normal)
         for field in [phoneField, codeField, passwordField, firstNameField, lastNameField] {
             field.backgroundColor = theme.surfaceElevated
             field.textColor = theme.primaryText
@@ -187,19 +238,11 @@ final class AuthViewController: UIViewController {
 
         switch state {
         case .authorizationStateWaitTdlibParameters:
-            subtitleLabel.text = "Подключение к Telegram…"
-            activity.isHidden = false
-            activity.startAnimating()
+            // Экран подключения больше не блокирует ввод: TDLib инициализируется в фоне.
+            showPhoneEntry(subtitle: "Введите номер — код придёт после подключения")
 
         case .authorizationStateWaitPhoneNumber:
-            subtitleLabel.text = "Введите номер — придёт код подтверждения"
-            phoneField.isHidden = false
-            configureAction(title: "Получить код") { [weak self] in
-                guard let self else { return }
-                Task {
-                    await self.runBusy { await self.telegram.submitPhone(self.phoneField.text ?? "") }
-                }
-            }
+            showPhoneEntry(subtitle: "Введите номер — придёт код подтверждения")
 
         case .authorizationStateWaitCode(let info):
             subtitleLabel.text = "Введите код, который прислал Telegram"
@@ -257,10 +300,31 @@ final class AuthViewController: UIViewController {
             subtitleLabel.text = "Код из email пока не поддерживается этим клиентом."
 
         default:
-            subtitleLabel.text = "Загрузка…"
-            activity.isHidden = false
-            activity.startAnimating()
+            // Самое первое состояние до первого апдейта TDLib тоже должно быть рабочим.
+            showPhoneEntry(subtitle: "Введите номер телефона")
         }
+
+        updateDiagnostics()
+    }
+
+    private func showPhoneEntry(subtitle: String) {
+        subtitleLabel.text = subtitle
+        phoneField.isHidden = false
+        configureAction(title: "Получить код") { [weak self] in
+            guard let self else { return }
+            Task {
+                await self.runBusy { await self.telegram.submitPhone(self.phoneField.text ?? "") }
+            }
+        }
+    }
+
+    private func updateDiagnostics() {
+        statusLabel.text = currentStatus
+        statusLabel.isHidden = currentStatus.isEmpty
+        let message = currentConnectionError ?? currentAuthError
+        errorLabel.text = message
+        errorLabel.isHidden = message == nil
+        retryButton.isHidden = currentConnectionError == nil
     }
 
     private func configureAction(title: String, handler: @escaping () -> Void) {
@@ -272,6 +336,10 @@ final class AuthViewController: UIViewController {
 
     @objc private func actionTapped() {
         action?()
+    }
+
+    @objc private func retryTapped() {
+        telegram.retryConnection()
     }
 
     private func runBusy(_ work: @escaping () async -> Void) async {

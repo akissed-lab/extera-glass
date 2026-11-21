@@ -16,6 +16,10 @@ final class TDLibService: ObservableObject {
     @Published private(set) var files: [Int: Data] = [:]
     @Published private(set) var isLoading = false
     @Published var errorMessage: String?
+    /// Видимый статус подключения. Нужен, чтобы экран входа никогда не зависал
+    /// без объяснения, даже если TDLib не присылает обновления.
+    @Published private(set) var connectionStatus = "Подключение…"
+    @Published private(set) var connectionError: String?
 
     var currentUserId: Int64? { currentUser?.id }
 
@@ -24,7 +28,11 @@ final class TDLibService: ObservableObject {
     private let manager = TDLibClientManager()
     private var client: TDLibClient!
     private var didConfigure = false
+    private var didReceiveParametersOk = false
     private var didLoadInitial = false
+    private var configurationTask: Task<Void, Never>?
+    private var configAttempt = 0
+    private var pendingPhone: String?
 
     init() {
         // Ставим shared ДО создания клиента: первое обновление TDLib может прийти
@@ -36,16 +44,10 @@ final class TDLibService: ObservableObject {
             DispatchQueue.main.async { service.handle(update) }
         }
 
-        // Страховка на случай, если стартовое обновление всё же было пропущено.
-        Task { [weak self] in
-            try? await Task.sleep(nanoseconds: 1_000_000_000)
-            await MainActor.run {
-                guard let self, !self.didConfigure else { return }
-                if case .authorizationStateWaitTdlibParameters = self.authorizationState {
-                    self.configureIfNeeded()
-                }
-            }
-        }
+        // Не ждём стартовое обновление: TDLib должен получить параметры сразу,
+        // иначе приложение может навсегда остаться в waitTdlibParameters.
+        configureIfNeeded()
+        startConnectionMonitor()
     }
 
     deinit {
@@ -61,8 +63,16 @@ final class TDLibService: ObservableObject {
             authorizationState = payload.authorizationState
             switch payload.authorizationState {
             case .authorizationStateWaitTdlibParameters:
+                connectionStatus = "Инициализация TDLib…"
                 configureIfNeeded()
+            case .authorizationStateWaitPhoneNumber:
+                connectionStatus = ""
+                connectionError = nil
+                submitPendingPhoneIfNeeded()
             case .authorizationStateReady:
+                connectionStatus = ""
+                connectionError = nil
+                errorMessage = nil
                 loadInitialDataIfNeeded()
             default:
                 break
@@ -177,16 +187,24 @@ final class TDLibService: ObservableObject {
     private func configureIfNeeded() {
         guard !didConfigure else { return }
         didConfigure = true
-        Task {
+        didReceiveParametersOk = false
+        configAttempt += 1
+        let attempt = configAttempt
+        configurationTask?.cancel()
+
+        connectionStatus = "Инициализация TDLib… попытка \(attempt)"
+        configurationTask = Task { [weak self] in
+            guard let self else { return }
             do {
-                _ = try await client.setTdlibParameters(
+                try Task.checkCancellation()
+                _ = try await self.client.setTdlibParameters(
                     apiHash: Config.apiHash,
                     apiId: Config.apiID,
                     applicationVersion: Config.appVersion,
-                    databaseDirectory: tdlibDirectory,
+                    databaseDirectory: self.tdlibDirectory,
                     databaseEncryptionKey: nil,
                     deviceModel: Config.deviceModel,
-                    filesDirectory: tdlibFilesDirectory,
+                    filesDirectory: self.tdlibFilesDirectory,
                     systemLanguageCode: Config.languageCode,
                     systemVersion: UIDevice.current.systemVersion,
                     useChatInfoDatabase: true,
@@ -195,10 +213,57 @@ final class TDLibService: ObservableObject {
                     useSecretChats: true,
                     useTestDc: false
                 )
+                await MainActor.run {
+                    guard attempt == self.configAttempt else { return }
+                    self.didReceiveParametersOk = true
+                    self.connectionStatus = "Параметры приняты, ждём ответа Telegram…"
+                }
+            } catch is CancellationError {
+                return
             } catch {
-                await report(error)
+                await MainActor.run {
+                    guard attempt == self.configAttempt else { return }
+                    self.didConfigure = false
+                    self.connectionError = "TDLib отклонил параметры: \(error.localizedDescription)"
+                    self.connectionStatus = "Ошибка подключения — повторяем…"
+                }
             }
         }
+    }
+
+    /// TDLib иногда не отвечает на setTdlibParameters и не возвращает ошибку.
+    /// Периодически сбрасываем попытку, чтобы экран не висел «вечно».
+    private func startConnectionMonitor() {
+        Task { [weak self] in
+            while true {
+                try? await Task.sleep(nanoseconds: 4_000_000_000)
+                guard let self else { return }
+                await MainActor.run {
+                    guard case .authorizationStateWaitTdlibParameters = self.authorizationState else { return }
+                    if self.didReceiveParametersOk {
+                        if self.connectionError == nil {
+                            self.connectionError = "TDLib не присылает состояние авторизации. Нажмите «Повторить» или переустановите приложение."
+                        }
+                        return
+                    }
+                    if self.didConfigure {
+                        self.didConfigure = false
+                        self.configurationTask?.cancel()
+                        self.connectionError = "TDLib не ответил вовремя. Повторяем подключение…"
+                    }
+                    self.configureIfNeeded()
+                }
+            }
+        }
+    }
+
+    /// Ручная кнопка «Повторить» на экране входа.
+    func retryConnection() {
+        didConfigure = false
+        didReceiveParametersOk = false
+        configurationTask?.cancel()
+        connectionError = nil
+        configureIfNeeded()
     }
 
     private var tdlibDirectory: String {
@@ -216,15 +281,46 @@ final class TDLibService: ObservableObject {
     }
 
     func submitPhone(_ phone: String) async {
+        let normalized = phone.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !normalized.isEmpty else {
+            await MainActor.run { self.errorMessage = "Введите номер телефона" }
+            return
+        }
+        let value = normalized.hasPrefix("+") ? normalized : "+" + normalized
+
+        let state = await MainActor.run { self.authorizationState }
+        if case .authorizationStateWaitPhoneNumber = state {
+            await sendPhoneNumber(value)
+        } else {
+            // Пользователь может ввести номер сразу, пока TDLib ещё подключается.
+            await MainActor.run {
+                self.pendingPhone = value
+                self.connectionStatus = "Номер сохранён — отправим его сразу после подключения"
+            }
+        }
+    }
+
+    private func sendPhoneNumber(_ value: String) async {
+        await MainActor.run { self.errorMessage = nil }
         do {
-            let normalized = phone.isEmpty ? phone : (phone.hasPrefix("+") ? phone : "+" + phone)
-            _ = try await client.setAuthenticationPhoneNumber(phoneNumber: normalized, settings: nil)
+            _ = try await client.setAuthenticationPhoneNumber(phoneNumber: value, settings: nil)
         } catch {
             await report(error)
         }
     }
 
+    private func submitPendingPhoneIfNeeded() {
+        guard let phone = pendingPhone else { return }
+        pendingPhone = nil
+        connectionStatus = ""
+        Task { [weak self] in
+            guard let self else { return }
+            await self.sendPhoneNumber(phone)
+        }
+    }
+
     func submitCode(_ code: String) async {
+        await MainActor.run { self.errorMessage = nil }
         do {
             _ = try await client.checkAuthenticationCode(code: code)
         } catch {
@@ -233,6 +329,7 @@ final class TDLibService: ObservableObject {
     }
 
     func submitPassword(_ password: String) async {
+        await MainActor.run { self.errorMessage = nil }
         do {
             _ = try await client.checkAuthenticationPassword(password: password)
         } catch {
