@@ -284,7 +284,7 @@ def main() -> None:
     add("\t\t\tisa = XCRemoteSwiftPackageReference;")
     add('\t\t\trepositoryURL = "https://github.com/Swiftgram/TDLibKit.git";')
     add("\t\t\trequirement = {")
-    add('\t\t\t\tbranch = master;')
+    add('\t\t\t\tbranch = main;')
     add('\t\t\t\tkind = branch;')
     add("\t\t\t};")
     add("\t\t};")
