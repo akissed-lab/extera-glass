@@ -204,7 +204,7 @@ final class AuthViewController: UIViewController {
         case .authorizationStateWaitCode(let info):
             subtitleLabel.text = "Введите код, который прислал Telegram"
             codeField.isHidden = false
-            hintLabel.text = codeHint(info)
+            hintLabel.text = codeHint(info.codeInfo)
             hintLabel.isHidden = false
             configureAction(title: "Войти") { [weak self] in
                 guard let self else { return }

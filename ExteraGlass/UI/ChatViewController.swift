@@ -337,9 +337,9 @@ final class ChatViewController: UIViewController, UITableViewDataSource, UITable
         present(sheet, animated: true)
     }
 
-    @objc private func keyboardWillChange(_ notification: Notification) {
+    @objc private func keyboardWillChange(_ notification: Foundation.Notification) {
         guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        let height = max(0, view.bounds.height - frame.origin.y)
+        let height: CGFloat = max(0, view.bounds.height - frame.origin.y)
         inputBottom.constant = -height
         inputBar.layoutMargins.bottom = height > 0 ? 8 : 8 + view.safeAreaInsets.bottom
         UIView.animate(withDuration: 0.2) { self.view.layoutIfNeeded() }

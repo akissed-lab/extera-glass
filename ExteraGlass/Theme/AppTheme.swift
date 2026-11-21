@@ -7,7 +7,7 @@ extension UIColor {
         var raw = hex.hasPrefix("#") ? String(hex.dropFirst()) : hex
         if raw.count == 6 { raw = "FF" + raw }
         guard raw.count == 8, let value = UInt64(raw, radix: 16) else {
-            self.init(gray: 0.5, alpha: 1)
+            self.init(white: 0.5, alpha: 1)
             return
         }
         let a = CGFloat((value >> 24) & 0xFF) / 255
