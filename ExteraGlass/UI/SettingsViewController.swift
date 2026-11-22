@@ -147,8 +147,8 @@ final class SettingsViewController: UITableViewController {
             }
 
         default:
-            cell.textLabel?.text = "Неофициальный клиент на TDLib"
-            cell.detailTextLabel?.text = "Темы и твики из ExteraGram. Собственные api_id / api_hash в Config.swift."
+            cell.textLabel?.text = "Неофициальный клиент"
+            cell.detailTextLabel?.text = "Темы и твики из ExteraGram. Не входит в официальный Telegram."
             cell.detailTextLabel?.numberOfLines = 0
             cell.selectionStyle = .none
             return cell
@@ -160,7 +160,7 @@ final class SettingsViewController: UITableViewController {
         if indexPath.section == 0 && indexPath.row == 1 {
             let alert = UIAlertController(
                 title: "Выйти из аккаунта?",
-                message: "Локальная база TDLib останется на устройстве.",
+                message: "Локальные данные останутся на устройстве.",
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: "Выйти", style: .destructive) { [weak self] _ in

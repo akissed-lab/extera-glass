@@ -32,17 +32,35 @@ final class RootViewController: UIViewController {
     }
 
     private func update(for state: AuthorizationState) {
-        switch state {
-        case .authorizationStateReady,
-             .authorizationStateLoggingOut,
-             .authorizationStateClosing:
+        if shouldShowMain(for: state) {
             if !(current is MainTabBarController) {
                 show(MainTabBarController(telegram: telegram))
             }
+        } else if !(current is AuthViewController) {
+            show(AuthViewController(telegram: telegram))
+        }
+    }
+
+    /// После успешного входа сессия живёт в локальной базе TDLib.
+    /// Пока сервер не ответил, показываем основной экран, если вход уже был раньше.
+    private func shouldShowMain(for state: AuthorizationState) -> Bool {
+        switch state {
+        case .authorizationStateReady:
+            return true
+        case .authorizationStateWaitPhoneNumber,
+             .authorizationStateWaitCode,
+             .authorizationStateWaitPassword,
+             .authorizationStateWaitRegistration,
+             .authorizationStateWaitOtherDeviceConfirmation,
+             .authorizationStateWaitEmailAddress,
+             .authorizationStateWaitEmailCode,
+             .authorizationStateLoggingOut,
+             .authorizationStateClosing:
+            return false
+        case .authorizationStateWaitTdlibParameters:
+            return telegram.hasActiveSession
         default:
-            if !(current is AuthViewController) {
-                show(AuthViewController(telegram: telegram))
-            }
+            return telegram.hasActiveSession
         }
     }
 

@@ -238,8 +238,8 @@ final class AuthViewController: UIViewController {
 
         switch state {
         case .authorizationStateWaitTdlibParameters:
-            // Экран подключения больше не блокирует ввод: TDLib инициализируется в фоне.
-            showPhoneEntry(subtitle: "Введите номер — код придёт после подключения")
+            // Форма доступна сразу: подключение восстанавливается в фоне.
+            showPhoneEntry(subtitle: "Введите номер телефона")
 
         case .authorizationStateWaitPhoneNumber:
             showPhoneEntry(subtitle: "Введите номер — придёт код подтверждения")

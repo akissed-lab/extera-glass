@@ -16,10 +16,22 @@ final class TDLibService: ObservableObject {
     @Published private(set) var files: [Int: Data] = [:]
     @Published private(set) var isLoading = false
     @Published var errorMessage: String?
-    /// Видимый статус подключения. Нужен, чтобы экран входа никогда не зависал
-    /// без объяснения, даже если TDLib не присылает обновления.
-    @Published private(set) var connectionStatus = "Подключение…"
+    /// Внутренний диагностический статус. Пользователю не показываем технические
+    /// детали подключения — экран входа доступен сразу, а сеть восстанавливается в фоне.
+    @Published private(set) var connectionStatus = ""
     @Published private(set) var connectionError: String?
+
+    private let sessionActiveKey = "extera.session.active"
+
+    /// Признак того, что на этом устройстве уже был успешный вход.
+    /// Позволяет открывать основной экран сразу, не дожидаясь ответа сервера.
+    var hasActiveSession: Bool {
+        UserDefaults.standard.bool(forKey: sessionActiveKey)
+    }
+
+    private func setSessionActive(_ value: Bool) {
+        UserDefaults.standard.set(value, forKey: sessionActiveKey)
+    }
 
     var currentUserId: Int64? { currentUser?.id }
 
@@ -63,17 +75,28 @@ final class TDLibService: ObservableObject {
             authorizationState = payload.authorizationState
             switch payload.authorizationState {
             case .authorizationStateWaitTdlibParameters:
-                connectionStatus = "Инициализация TDLib…"
+                connectionStatus = ""
                 configureIfNeeded()
             case .authorizationStateWaitPhoneNumber:
+                setSessionActive(false)
                 connectionStatus = ""
                 connectionError = nil
                 submitPendingPhoneIfNeeded()
             case .authorizationStateReady:
+                setSessionActive(true)
                 connectionStatus = ""
                 connectionError = nil
                 errorMessage = nil
                 loadInitialDataIfNeeded()
+            case .authorizationStateWaitCode,
+                 .authorizationStateWaitPassword,
+                 .authorizationStateWaitRegistration,
+                 .authorizationStateWaitOtherDeviceConfirmation,
+                 .authorizationStateWaitEmailAddress,
+                 .authorizationStateWaitEmailCode,
+                 .authorizationStateLoggingOut,
+                 .authorizationStateClosing:
+                setSessionActive(false)
             default:
                 break
             }
@@ -192,7 +215,7 @@ final class TDLibService: ObservableObject {
         let attempt = configAttempt
         configurationTask?.cancel()
 
-        connectionStatus = "Инициализация TDLib… попытка \(attempt)"
+        connectionStatus = ""
         configurationTask = Task { [weak self] in
             guard let self else { return }
             do {
@@ -217,7 +240,7 @@ final class TDLibService: ObservableObject {
                 await MainActor.run {
                     guard attempt == self.configAttempt else { return }
                     self.didReceiveParametersOk = true
-                    self.connectionStatus = "Параметры приняты, ждём ответа Telegram…"
+                    self.connectionStatus = ""
                 }
             } catch is CancellationError {
                 return
@@ -225,8 +248,8 @@ final class TDLibService: ObservableObject {
                 await MainActor.run {
                     guard attempt == self.configAttempt else { return }
                     self.didConfigure = false
-                    self.connectionError = "TDLib отклонил параметры: \(error.localizedDescription)"
-                    self.connectionStatus = "Ошибка подключения — повторяем…"
+                    self.connectionError = "Не удалось подключиться. Повторяем…"
+                    self.connectionStatus = ""
                 }
             }
         }
@@ -243,14 +266,14 @@ final class TDLibService: ObservableObject {
                     guard case .authorizationStateWaitTdlibParameters = self.authorizationState else { return }
                     if self.didReceiveParametersOk {
                         if self.connectionError == nil {
-                            self.connectionError = "TDLib не присылает состояние авторизации. Нажмите «Повторить» или переустановите приложение."
+                            self.connectionError = "Не удалось войти. Нажмите «Повторить»."
                         }
                         return
                     }
                     if self.didConfigure {
                         self.didConfigure = false
                         self.configurationTask?.cancel()
-                        self.connectionError = "TDLib не ответил вовремя. Повторяем подключение…"
+                        self.connectionError = "Подключение занимает больше времени, чем обычно. Повторяем…"
                     }
                     self.configureIfNeeded()
                 }
@@ -296,7 +319,7 @@ final class TDLibService: ObservableObject {
             // Пользователь может ввести номер сразу, пока TDLib ещё подключается.
             await MainActor.run {
                 self.pendingPhone = value
-                self.connectionStatus = "Номер сохранён — отправим его сразу после подключения"
+                self.connectionStatus = "Номер сохранён"
             }
         }
     }
@@ -351,6 +374,7 @@ final class TDLibService: ObservableObject {
     }
 
     func logout() async {
+        await MainActor.run { setSessionActive(false) }
         do {
             _ = try await client.logOut()
         } catch {
